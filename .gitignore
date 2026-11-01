@@ -23,4 +23,7 @@ src/i18n/locales/**/*.js
 # Tanstack Router generated
 src/routeTree.gen.ts
 
+# Agent guard audit logs
+.agent/logs/
+
 .commandcode

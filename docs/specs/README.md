@@ -4,6 +4,8 @@
 
 - [restrict-cross-route-imports.md](./restrict-cross-route-imports.md) — 禁止 `src/routes` 跨 route 引用（方案对比）
 - [restrict-kebab-case-filenames.md](./restrict-kebab-case-filenames.md) — 强制 ts/tsx/js/jsx 源文件名使用 kebab-case
+- [ai-quality-gates.md](./ai-quality-gates.md) — AI 门禁现状盘点、常见门禁清单与分层落地方案
+- [agent-hook-gates.md](./agent-hook-gates.md) — Agent hooks 门禁：pre-tool / post-tool / 生命周期 / permission 方案
 
 模板见 [../.template/technical-design.md](../.template/technical-design.md)，项目规范见 [../harness/](../harness/)。
 

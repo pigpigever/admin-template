@@ -11,7 +11,7 @@
 - 预览：`pnpm serve`
 - 检查：`pnpm lint` / `pnpm lint:fix` / `pnpm typecheck`
 - 测试：`pnpm test` / `pnpm test:watch` / `pnpm test:layout`
-- 门禁：`pnpm docs:check`（文档结构）/ `pnpm test:layout`（测试布局）
+- 门禁：`pnpm docs:check`（文档结构）/ `pnpm test:layout`（测试布局）/ `pnpm verify`（全量）
 - 文案：`pnpm extract`（改文案后必须执行）
 - 接口：`pnpm api:gen`（按 `dune.config.ts` 从 swagger 生成到 `src/apis/`）
 - 环境变量：`pnpm env:sync <development|production>`
@@ -26,6 +26,7 @@
 - JSX 回调超过 1 行抽成具名函数；JSX props 超过 2 个时每个 prop 单独一行
 - 测试代码放根目录 `tests/`，不在 `src/` 里写测试
 - 源文件（ts/tsx/js/jsx）文件名用 kebab-case（如 `query-client.ts`）；`unicorn/filename-case` 以 error 拦截
+- Agent 门禁：策略在 `.agent/guard-policy.json`，脚本在 `.agent/hooks/`；opencode / Claude / Codex 的接线各在 `.opencode/`、`.claude/`、`.codex/`，改策略或接线前先问
 - 自定义 oxlint 插件放 `plugins/`，按关注点拆分（报错信息用英文）
 - 布局放 `src/layouts/`，不放 `src/components/`
 - 路由用虚拟文件路由：在 `src/routes.ts` 声明，页面文件放 `src/routes/`；新增页面两处都要改
@@ -37,5 +38,5 @@
 ## Boundaries
 
 - ✅ Always：完成任务前跑 `pnpm lint && pnpm typecheck && pnpm test`；沿用现有目录与命名
-- ⚠️ Ask first：新增或升级依赖；改 `.oxlintrc.json`；改 `vite.config.ts` / `helm/` / CI；改 i18n catalog 结构
+- ⚠️ Ask first：新增或升级依赖；改 `.oxlintrc.json`；改 `vite.config.ts` / `helm/` / CI；改 i18n catalog 结构；改 `.agent/` 门禁策略或 agent hooks
 - 🚫 Never：提交密钥或 `.env*`；手改生成文件（`src/routeTree.gen.ts`、`src/apis/`、编译产物）；用 `--no-verify` 绕过钩子

@@ -1,0 +1,66 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=claude node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" SessionStart"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=claude node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" PreToolUse"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=claude node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" PreToolUse"
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=claude node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" PreToolUse"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=claude node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" PostToolUse"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=claude node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" Stop",
+            "timeout": 180
+          }
+        ]
+      }
+    ]
+  }
+}

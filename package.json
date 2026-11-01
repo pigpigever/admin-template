@@ -17,6 +17,7 @@
     "test:layout": "node docs/.scripts/check-tests.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm docs:check && pnpm test:layout",
     "prepare": "husky"
   },
   "dependencies": {

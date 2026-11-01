@@ -1,0 +1,70 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=codex node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" SessionStart"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=codex node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" PreToolUse",
+            "statusMessage": "Checking command"
+          }
+        ]
+      },
+      {
+        "matcher": "apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=codex node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" PreToolUse",
+            "statusMessage": "Checking file write"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|read_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=codex node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" PreToolUse",
+            "statusMessage": "Checking file read"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=codex node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" PostToolUse",
+            "statusMessage": "Checking edited file"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_GUARD_AGENT=codex node \"$(git rev-parse --show-toplevel)/.agent/hooks/agent-hook.mjs\" Stop",
+            "timeout": 180
+          }
+        ]
+      }
+    ]
+  }
+}

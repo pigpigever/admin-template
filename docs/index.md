@@ -16,6 +16,8 @@
 
 - [specs/restrict-cross-route-imports.md](./specs/restrict-cross-route-imports.md) — 禁止 `src/routes` 跨 route 引用（方案对比）
 - [specs/restrict-kebab-case-filenames.md](./specs/restrict-kebab-case-filenames.md) — 强制 ts/tsx/js/jsx 源文件名使用 kebab-case
+- [specs/ai-quality-gates.md](./specs/ai-quality-gates.md) — AI 门禁现状盘点、常见门禁清单与分层落地方案
+- [specs/agent-hook-gates.md](./specs/agent-hook-gates.md) — Agent hooks 门禁：pre-tool / post-tool / 生命周期 / permission 方案
 - [specs/README.md](./specs/README.md) — specs 目录说明（技术方案正文放这里）
 
 ## 模板（.template）

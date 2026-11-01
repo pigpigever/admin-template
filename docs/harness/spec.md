@@ -118,14 +118,15 @@ docs/                 # 文档（索引见 docs/index.md）
 ## 9. Git 与提交
 
 - `pre-commit`：husky 执行 lint-staged（`oxlint --fix --deny-warnings`）+ `pnpm typecheck`，失败即拦截提交
-- 不要用 `--no-verify` 绕过钩子
+- Agent hooks：策略在 `.agent/guard-policy.json`，共享脚本在 `.agent/hooks/agent-hook.mjs`；`.opencode/`、`.claude/`、`.codex/` 只做接线。`Stop` 阶段运行 `pnpm verify`
+- 不要用 `--no-verify` 绕过钩子；agent hooks 也会拦截该参数
 - 生成文件不手改：`src/routeTree.gen.ts` 由插件生成，`.po` catalog 由 `pnpm extract` 维护
 
 ## 10. 边界（Always / Ask first / Never）
 
 ### ✅ Always
 
-- 完成任务前跑 `pnpm lint && pnpm typecheck && pnpm test`
+- 完成任务前跑 `pnpm lint && pnpm typecheck && pnpm test`（全量用 `pnpm verify`）
 - 改动文案后跑 `pnpm extract`
 - 沿用既有目录结构、命名与请求 / 文案约定
 - 生成物（`.env*`、编译 catalog、`*.tsbuildinfo`）不进版本库（已 gitignore）
