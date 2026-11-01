@@ -1,8 +1,3 @@
-| 日期 | 变更 | 作者 |
-| --- | --- | --- |
-| <YYYY-MM-DD> | <填写最新变更，如「初稿」> | <name> |
-| <YYYY-MM-DD> | <更早的变更，如「评审意见」> | <name> |
-
 # 技术方案：<标题>
 
 | 项 | 内容 |
@@ -10,7 +5,16 @@
 | 状态 | Draft |
 | 作者 | <name> |
 | 日期 | <YYYY-MM-DD> |
+| 版本 | v0.1 |
 | 关联 | <issue / PR / 需求链接> |
+
+## 变更记录
+
+| 版本 | 日期 | 变更 | 作者 |
+| --- | --- | --- | --- |
+| v0.1 | <YYYY-MM-DD> | <初稿> | <name> |
+
+> 新变更加在表格最上方，版本号按 `v0.1` → `v0.2` 递增；变更记录放在元数据表下方。
 
 > 新建默认 `Draft`，不要写并列值。状态只能取 `Draft` / `In Review` / `Approved` / `Implemented` / `Superseded` / `Rejected`，定义与流转见 `docs/skills/write-spec/SKILL.md`。
 

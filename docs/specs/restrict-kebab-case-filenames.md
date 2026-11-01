@@ -1,8 +1,3 @@
-| 日期 | 变更 | 作者 |
-| --- | --- | --- |
-| 2026-11-01 | 已按方案 A 实现：开启 `unicorn/filename-case`，重命名 `query-client.ts` | opencode |
-| 2026-11-01 | 初稿：ts/tsx/js/jsx 文件名强制 kebab-case 方案 | opencode |
-
 # 技术方案：强制源文件名使用 kebab-case
 
 | 项 | 内容 |
@@ -10,7 +5,15 @@
 | 状态 | Implemented |
 | 作者 | opencode |
 | 日期 | 2026-11-01 |
+| 版本 | v0.2 |
 | 关联 | — |
+
+## 变更记录
+
+| 版本 | 日期 | 变更 | 作者 |
+| --- | --- | --- | --- |
+| v0.2 | 2026-11-01 | 已按方案 A 实现：开启 `unicorn/filename-case`，重命名 `query-client.ts` | opencode |
+| v0.1 | 2026-11-01 | 初稿：ts/tsx/js/jsx 文件名强制 kebab-case 方案 | opencode |
 
 ## 1. 背景与问题
 

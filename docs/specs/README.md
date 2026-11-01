@@ -17,6 +17,8 @@
 
 状态只写在文档元数据表里，不按状态分目录；禁止 `WIP` / `Done` / `Approved*` / `Draft/In Review` 等模糊值。
 
+元数据表在前，`## 变更记录` 在后；变更记录从 `v0.1` 开始，最新版本在第一行，版本号递增。
+
 ## 模块
 
 - [quality/README.md](./quality/README.md) — 质量 / 测试 / CI 方案

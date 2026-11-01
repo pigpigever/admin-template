@@ -1,8 +1,3 @@
-| 日期 | 变更 | 作者 |
-| --- | --- | --- |
-| 2026-11-01 | 已实现 P0：共享策略 + opencode/Claude/Codex 接线 + 单测 | opencode |
-| 2026-11-01 | 初稿：Agent hooks 门禁现状与落地方案 | opencode |
-
 # 技术方案：Agent hooks 门禁
 
 | 项 | 内容 |
@@ -10,7 +5,15 @@
 | 状态 | Implemented |
 | 作者 | opencode |
 | 日期 | 2026-11-01 |
+| 版本 | v0.2 |
 | 关联 | — |
+
+## 变更记录
+
+| 版本 | 日期 | 变更 | 作者 |
+| --- | --- | --- | --- |
+| v0.2 | 2026-11-01 | 已实现 P0：共享策略 + opencode/Claude/Codex 接线 + 单测 | opencode |
+| v0.1 | 2026-11-01 | 初稿：Agent hooks 门禁现状与落地方案 | opencode |
 
 ## 1. 背景与问题
 

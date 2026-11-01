@@ -77,8 +77,8 @@ description: Use when creating, moving, or updating technical plans under docs/s
 
 复制 `docs/.template/technical-design.md` 的结构，至少包含：
 
-- 变更记录表
-- 元数据表：`状态` / `作者` / `日期` / `关联`
+- 元数据表：`状态` / `作者` / `日期` / `版本` / `关联`
+- 变更记录表：放在元数据表下方，列 `版本` / `日期` / `变更` / `作者`；从 `v0.1` 开始，最新版本在第一行，版本号递增
 - `features/` 文档额外包含：`所属域` / `关联路由` / `划分理由`
 - 背景、目标与非目标、方案、备选方案、影响面、测试、风险、验收标准
 
@@ -105,7 +105,7 @@ description: Use when creating, moving, or updating technical plans under docs/s
 - `Implemented` 必须勾完验收标准，且关联代码已合并；禁止 `Implemented (partial)`
 - `Superseded` 必须写替代文档链接；旧文档保留，不删除
 - `Rejected` 必须写原因；需要重启时新建 `Draft` 并链接旧文档，不修改旧状态
-- 任何状态变更都要更新元数据 `日期`，并在变更记录中加一行
+- 任何状态变更或实质内容变更都要更新元数据 `日期` / `版本`，并在变更记录最上方加一行（版本号递增，如 `v0.2`）
 - 状态只写在元数据表里，**不进入文件名或目录名**
 
 ### 5. 更新索引

@@ -1,8 +1,3 @@
-| 日期 | 变更 | 作者 |
-| --- | --- | --- |
-| 2026-10-31 | 已按方案 A 实现 `routes/no-cross-route-import`（`plugins/routes.mjs`） | Command Code |
-| 2026-10-31 | 初稿：跨 route 依赖约束方案对比 | Command Code |
-
 # 技术方案：禁止 src/routes 跨 route 引用
 
 | 项 | 内容 |
@@ -10,7 +5,15 @@
 | 状态 | Implemented |
 | 作者 | Command Code |
 | 日期 | 2026-10-31 |
+| 版本 | v0.2 |
 | 关联 | — |
+
+## 变更记录
+
+| 版本 | 日期 | 变更 | 作者 |
+| --- | --- | --- | --- |
+| v0.2 | 2026-10-31 | 已按方案 A 实现 `routes/no-cross-route-import`（`plugins/routes.mjs`） | Command Code |
+| v0.1 | 2026-10-31 | 初稿：跨 route 依赖约束方案对比 | Command Code |
 
 ## 1. 背景与问题
 
