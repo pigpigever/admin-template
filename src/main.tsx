@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import "@tanstack/react-query-devtools";
 
 import { createAppRouter } from "@/lib/router";
-import { queryClient } from "@/lib/queryClient";
+import { queryClient } from "@/lib/query-client";
 import { I18nProvider } from "@/i18n";
 import { cssVar } from "@/lib/theme";
 import { env } from "@/lib/env";

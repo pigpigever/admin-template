@@ -34,7 +34,7 @@ src/
 ├── routes.ts         # 虚拟文件路由树（Virtual File Routes）
 ├── components/       # 通用组件
 ├── i18n/             # I18nProvider + locales/{en,zh}/messages.po
-├── lib/              # env / request / router / queryClient / auth / theme
+├── lib/              # env / request / router / query-client / auth / theme
 ├── main.tsx          # 入口
 └── index.css         # Tailwind + @theme 主题变量
 helm/                 # 环境变量唯一来源（values*.yaml + chart）
@@ -90,6 +90,7 @@ docs/                 # 文档（索引见 docs/index.md）
 ## 7. 代码风格与 Lint
 
 - 遵循现有模式，不引入新范式
+- 源文件（ts/tsx/js/jsx）文件名用 kebab-case（如 `query-client.ts`），由 `unicorn/filename-case` 以 error 拦截
 - `pnpm lint`（oxlint，`correctness` 为 error，其余为 warn）与 `pnpm typecheck` 必须通过
 - `.oxlintrc.json` 中被关闭的规则都有明确理由（见文件内分组），修改前先问
 - 插件类放 `plugins/` 目录，按关注点拆分，通过 `.oxlintrc.json` 的 `jsPlugins` 加载（报错信息用英文）：

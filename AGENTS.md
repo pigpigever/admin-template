@@ -25,6 +25,7 @@
 - 通用工具优先用 `es-toolkit`（`debounce`/`throttle`/`groupBy`/`chunk`/`uniq`/`pick`/`omit`/`clamp` 等）；库里有现成方法就别自己实现，也不要引入 lodash/underscore
 - JSX 回调超过 1 行抽成具名函数；JSX props 超过 2 个时每个 prop 单独一行
 - 测试代码放根目录 `tests/`，不在 `src/` 里写测试
+- 源文件（ts/tsx/js/jsx）文件名用 kebab-case（如 `query-client.ts`）；`unicorn/filename-case` 以 error 拦截
 - 自定义 oxlint 插件放 `plugins/`，按关注点拆分（报错信息用英文）
 - 布局放 `src/layouts/`，不放 `src/components/`
 - 路由用虚拟文件路由：在 `src/routes.ts` 声明，页面文件放 `src/routes/`；新增页面两处都要改

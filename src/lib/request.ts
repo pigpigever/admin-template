@@ -1,6 +1,6 @@
 import { RequestBuilder, type RequestFnParams } from "@dune2/tools/rq";
 import { env } from "@/lib/env";
-import { queryClient } from "@/lib/queryClient";
+import { queryClient } from "@/lib/query-client";
 import { clearAuth, getAuthUser } from "@/lib/auth";
 import {
   HTTP_STATUS_NO_CONTENT,

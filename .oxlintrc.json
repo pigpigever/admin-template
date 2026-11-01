@@ -73,7 +73,7 @@
     "max-lines-per-function": "off",
     "max-statements": ["warn", 20],
     "unicorn/no-null": "off",
-    "unicorn/filename-case": "off",
+    "unicorn/filename-case": ["error", { "case": "kebabCase" }],
     "unicorn/prefer-query-selector": "off",
     "promise/avoid-new": "off"
   },

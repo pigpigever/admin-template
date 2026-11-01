@@ -15,6 +15,7 @@
 ## 技术方案（specs）
 
 - [specs/restrict-cross-route-imports.md](./specs/restrict-cross-route-imports.md) — 禁止 `src/routes` 跨 route 引用（方案对比）
+- [specs/restrict-kebab-case-filenames.md](./specs/restrict-kebab-case-filenames.md) — 强制 ts/tsx/js/jsx 源文件名使用 kebab-case
 - [specs/README.md](./specs/README.md) — specs 目录说明（技术方案正文放这里）
 
 ## 模板（.template）
