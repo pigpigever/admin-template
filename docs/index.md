@@ -30,6 +30,8 @@
 - [specs/ai-quality-gates.md](./specs/ai-quality-gates.md) — AI 门禁现状盘点、常见门禁清单与分层落地方案
 - [specs/agent-hook-gates.md](./specs/agent-hook-gates.md) — Agent hooks 门禁：pre-tool / post-tool / 生命周期 / permission 方案
 - [specs/organize-specs-by-module.md](./specs/organize-specs-by-module.md) — docs/specs 按模块组织与索引门禁方案
+- [specs/quality/README.md](./specs/quality/README.md) — quality 模块说明（测试 / CI / 质量门禁）
+- [specs/quality/tdd-with-vitest.md](./specs/quality/tdd-with-vitest.md) — 基于 Vitest 的 TDD 工作流（Draft）
 - [specs/README.md](./specs/README.md) — specs 目录说明（技术方案正文放这里）
 
 ## 技能（skills）

@@ -17,6 +17,13 @@
 
 状态只写在文档元数据表里，不按状态分目录；禁止 `WIP` / `Done` / `Approved*` / `Draft/In Review` 等模糊值。
 
+## 模块
+
+- [quality/README.md](./quality/README.md) — 质量 / 测试 / CI 方案
+- [quality/tdd-with-vitest.md](./quality/tdd-with-vitest.md) — 基于 Vitest 的 TDD 工作流（Draft）
+
+## 平铺（待迁移）
+
 - [restrict-cross-route-imports.md](./restrict-cross-route-imports.md) — 禁止 `src/routes` 跨 route 引用（方案对比）
 - [restrict-kebab-case-filenames.md](./restrict-kebab-case-filenames.md) — 强制 ts/tsx/js/jsx 源文件名使用 kebab-case
 - [ai-quality-gates.md](./ai-quality-gates.md) — AI 门禁现状盘点、常见门禁清单与分层落地方案
