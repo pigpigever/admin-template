@@ -17,6 +17,9 @@ src/i18n/locales/**/*.js
 # Vite
 .vite
 
+# Vitest
+coverage/
+
 # dune api codegen — swagger 输入不入库，生成产物 src/apis/ 入库
 /swagger/
 

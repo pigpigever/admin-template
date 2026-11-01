@@ -39,6 +39,23 @@ export default defineConfig({
     setupFiles: ["./tests/setup.ts"],
     css: false,
     restoreMocks: true,
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "html", "lcov"],
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: [
+        "src/routeTree.gen.ts",
+        "src/apis/**",
+        "src/main.tsx",
+        "src/**/*.d.ts",
+      ],
+      thresholds: {
+        lines: 55,
+        statements: 50,
+        functions: 35,
+        branches: 30,
+      },
+    },
   },
   server: {
     port: 5173,

@@ -17,6 +17,7 @@
     "test:layout": "node docs/.scripts/check-tests.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm docs:check && pnpm test:layout",
     "prepare": "husky"
   },
@@ -54,6 +55,7 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^5.0.5",
     "eslint-plugin-lingui": "^0.16.0",
     "husky": "^9.1.7",
     "jsdom": "^30.1.3",

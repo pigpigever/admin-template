@@ -1,4 +1,5 @@
 pnpm exec lint-staged
 pnpm typecheck
+pnpm test
 pnpm docs:check
 pnpm test:layout

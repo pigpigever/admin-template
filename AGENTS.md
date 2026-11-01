@@ -21,7 +21,7 @@
 - 构建：`pnpm build`（自动 `env:sync prod`）
 - 预览：`pnpm serve`
 - 检查：`pnpm lint` / `pnpm lint:fix` / `pnpm typecheck`
-- 测试：`pnpm test` / `pnpm test:watch` / `pnpm test:layout`
+- 测试：`pnpm test` / `pnpm test:watch` / `pnpm test:coverage` / `pnpm test:layout`
 - 门禁：`pnpm docs:check`（文档结构）/ `pnpm test:layout`（测试布局）/ `pnpm verify`（全量）
 - 文案：`pnpm extract`（改文案后必须执行）
 - 接口：`pnpm api:gen`（按 `dune.config.ts` 从 swagger 生成到 `src/apis/`）
@@ -36,6 +36,8 @@
 - 通用工具优先用 `es-toolkit`（`debounce`/`throttle`/`groupBy`/`chunk`/`uniq`/`pick`/`omit`/`clamp` 等）；库里有现成方法就别自己实现，也不要引入 lodash/underscore
 - JSX 回调超过 1 行抽成具名函数；JSX props 超过 2 个时每个 prop 单独一行
 - 测试代码放根目录 `tests/`，不在 `src/` 里写测试
+- 新增 / 修改 `src/` 行为前先在 `tests/` 写失败测试并确认红；bugfix 先写复现测试；测试与实现放同一 commit
+- 完成前跑 `pnpm verify`；pre-commit 会跑 `pnpm test`；禁止 `test.only` / 条件测试
 - 源文件（ts/tsx/js/jsx）文件名用 kebab-case（如 `query-client.ts`）；`unicorn/filename-case` 以 error 拦截
 - Agent 门禁：策略在 `.agent/guard-policy.json`，脚本在 `.agent/hooks/`；opencode / Claude / Codex 的接线各在 `.opencode/`、`.claude/`、`.codex/`，改策略或接线前先问
 - 写 / 改技术方案前先加载 `write-spec` skill（`docs/skills/write-spec/SKILL.md`）；按模块 / 域 / 能力放置，门禁只做结构兜底

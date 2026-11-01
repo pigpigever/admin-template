@@ -1,7 +1,3 @@
-| 日期 | 变更 | 作者 |
-| --- | --- | --- |
-| 2026-11-01 | 初稿：基于 Vitest 的 TDD 工作流、测试基础设施与门禁方案 | opencode |
-
 # 技术方案：基于 Vitest 的 TDD 工作流
 
 | 项 | 内容 |
@@ -9,7 +5,17 @@
 | 状态 | Draft |
 | 作者 | opencode |
 | 日期 | 2026-11-01 |
+| 版本 | v0.4 |
 | 关联 | [ai-quality-gates.md](../ai-quality-gates.md) / [testing.md](../../harness/testing.md) |
+
+## 变更记录
+
+| 版本 | 日期 | 变更 | 作者 |
+| --- | --- | --- | --- |
+| v0.4 | 2026-11-01 | 开启覆盖率门禁：基线 53.71% / 31.25% / 37.83% / 56.14%，阈值 50 / 30 / 35 / 55 | opencode |
+| v0.3 | 2026-11-01 | 落地 P0 与 pre-commit 测试：test-utils / factories / parseEnv / 路由 history / 测试补充 | opencode |
+| v0.2 | 2026-11-01 | 调整：测试门禁放 pre-commit，不新增 CI 测试 job | opencode |
+| v0.1 | 2026-11-01 | 初稿：基于 Vitest 的 TDD 工作流、测试基础设施与门禁方案 | opencode |
 
 ## 1. 背景与问题
 
@@ -17,7 +23,7 @@
 
 - 没有明确规定「先写失败测试，再写实现」
 - 页面、布局、路由守卫几乎没有测试，回归主要靠手点
-- 没有覆盖率门禁，也没有 CI
+- 没有覆盖率门禁，测试门禁也不在 pre-commit 强制执行
 - 测试基础设施散落在各文件：provider、QueryClient、Router、localStorage 重置都要临时拼
 - Agent 完成任务时，默认先改代码，测试只是可选项
 
@@ -170,8 +176,7 @@ export function renderRoute(
   route: string,
   { queryClient = createTestQueryClient() } = {}
 ) {
-  const router = createAppRouter({
-    queryClient,
+  const router = createAppRouter(queryClient, {
     history: createMemoryHistory({ initialEntries: [route] }),
   });
   render(
@@ -189,7 +194,7 @@ export function renderRoute(
 
 配套改动：
 
-- `src/lib/router.tsx` 的 `createAppRouter` 增加可选 `history`，保持 `main.tsx` 现有调用兼容
+- `src/lib/router.tsx` 的 `createAppRouter` 增加第二个可选参数 `{ history }`，保持 `main.tsx` 现有调用兼容
 - `tests/setup.ts` 增加全局 `localStorage.clear()` / `sessionStorage.clear()`，避免用例串数据
 - `tests/factories/` 提供 `makeAuthUser(overrides)` 等工厂，禁止在每个用例里重复手写对象
 - 异步等待统一用 `findBy*` / `waitFor`；延时逻辑用 `vi.useFakeTimers()`，不用真实 sleep
@@ -231,13 +236,13 @@ P2：页面数据与交互。
 
 ### 4.5 覆盖率与门禁
 
-新增开发依赖 `@vitest/coverage-v8`（**加依赖前先确认**），并增加脚本：
+已新增开发依赖 `@vitest/coverage-v8`，并增加脚本：
 
 ```json
 "test:coverage": "vitest run --coverage"
 ```
 
-`vite.config.ts` 的 `test.coverage` 建议：
+`vite.config.ts` 的 `test.coverage`：
 
 ```ts
 coverage: {
@@ -251,13 +256,15 @@ coverage: {
     "src/**/*.d.ts",
   ],
   thresholds: {
-    lines: 60,
-    statements: 60,
-    functions: 55,
-    branches: 50,
+    lines: 55,
+    statements: 50,
+    functions: 35,
+    branches: 30,
   },
 }
 ```
+
+基线（2026-11-01）：lines 56.14% / statements 53.71% / functions 37.83% / branches 31.25%，阈值按向下取整到 5 的倍数设置。
 
 执行策略：
 
@@ -272,12 +279,11 @@ coverage: {
 | 层 | 命令 | 时机 |
 | --- | --- | --- |
 | 本地快速 | `pnpm test <file>` | TDD 循环 |
-| 提交前 | `pnpm lint && pnpm typecheck`（已有 pre-commit） | commit |
-| 合并前 | `pnpm verify`（已含 test） | 本地 / CI |
-| 覆盖率 | `pnpm test:coverage` | CI 或发版前 |
-| 可选 | `vitest related --run <changed files>` | P2 再评估 |
+| 提交前 | `lint-staged` + `pnpm typecheck` + `pnpm test`（现有 pre-commit 已补 `pnpm test`） | commit |
+| 合并前 | `pnpm verify`（已含 test） | 本地 |
+| 覆盖率 | `pnpm test:coverage` | 发版前或按需 |
 
-CI 目前仓库没有 `.github/`。建议新增独立 CI job：`pnpm install --frozen-lockfile` → `pnpm verify` → `pnpm test:coverage`。**改 CI 前先确认平台与权限。**
+测试门禁只放 pre-commit，不新增 CI 测试 job。当前测试规模小（5 个文件 / 23 个用例，约 1 秒），pre-commit 跑全量 `pnpm test` 成本可接受；等测试明显变慢后，再评估 `vitest related --run <changed files>` 或拆分 pre-push，但不改变「pre-commit 是唯一强制测试门禁」的定位。
 
 ### 4.6 Agent 执行约定
 
@@ -289,7 +295,7 @@ CI 目前仓库没有 `.github/`。建议新增独立 CI job：`pnpm install --f
 - 禁止 `test.only`、条件测试、条件断言（oxlint 已有 `vitest/*` 规则）
 - 不 mock 被测模块本身；只 mock 网络、存储、时间、随机数等边界
 - 测试名用英文、描述行为，不用「works」「test1」
-- 完成前必须跑 `pnpm verify`；涉及覆盖率时跑 `pnpm test:coverage`
+- 完成前必须跑 `pnpm verify`；提交时 pre-commit 会跑 `pnpm test`；涉及覆盖率时跑 `pnpm test:coverage`
 - 确实无法测试时，在 PR / 回复中说明原因，并得到确认
 
 ### 4.7 与现有约定的关系
@@ -317,7 +323,7 @@ CI 目前仓库没有 `.github/`。建议新增独立 CI job：`pnpm install --f
 - 影响范围：开发流程、`tests/`、`vite.config.ts`、`package.json`、`AGENTS.md`、`docs/harness/testing.md`
 - 生产代码：只做可测性 seam（`parseEnv`、`createAppRouter` 可选 history），不改变运行时行为
 - 依赖：新增 `@vitest/coverage-v8`（devDependency），需确认
-- CI：新增 job 需要平台确认；未接入前本地 `pnpm verify` 仍是底线
+- 门禁：不新增 CI 测试 job；在现有 pre-commit 上增加 `pnpm test`，本地 `pnpm verify` 仍是底线
 - 数据迁移：无
 - 回滚：移除 coverage 依赖 / 脚本 / 阈值即可；测试文件可保留，不影响构建
 
@@ -325,11 +331,12 @@ CI 目前仓库没有 `.github/`。建议新增独立 CI job：`pnpm install --f
 
 - [ ] `tests/test-utils.tsx` 能被 `tests/routes/*` 复用，provider 不重复
 - [ ] `renderRoute` 能覆盖未登录重定向、已登录跳转
-- [ ] `loginApi` 用 fake timers 测成功 / 失败，不产生真实等待
-- [ ] `parseEnv` 覆盖默认值、缺失、非法值
-- [ ] `pnpm test` 全绿，`pnpm test:layout` 通过
-- [ ] `pnpm test:coverage` 能产出报告，阈值生效
-- [ ] `pnpm verify` 通过
+- [x] `loginApi` 用 fake timers 测成功 / 失败，不产生真实等待
+- [x] `parseEnv` 覆盖默认值、缺失、非法值
+- [x] `pnpm test` 全绿，`pnpm test:layout` 通过
+- [x] `pnpm test:coverage` 能产出报告，阈值生效
+- [x] pre-commit 能拦截失败测试
+- [x] `pnpm verify` 通过
 
 ## 8. 上线与回滚
 
@@ -347,27 +354,26 @@ CI 目前仓库没有 `.github/`。建议新增独立 CI job：`pnpm install --f
 | Ant Design + jsdom 的布局 / 异步告警 | 页面测试不稳定 | 先补 `matchMedia` / `ResizeObserver` polyfill；必要时缩小断言范围 |
 | Router 测试需要 memory history | 路由守卫测试成本高 | `createAppRouter` 增加可选 `history`，提供 `renderRoute` |
 | 覆盖率阈值过高 | 为了数字写无效测试 | 先测基线，再按 5 的倍数取整；只升不降 |
-| 新依赖需要审批 | 阻塞 P1 | 先完成 P0 文档与纯函数测试，不依赖新包 |
-| CI 平台未定 | 门禁无法强制 | 先在本地 `verify` 执行；CI 方案单独确认 |
+| 新依赖需要审批 | 阻塞 P1 | 已确认并加入 `@vitest/coverage-v8` |
+| pre-commit 全量测试变慢 | 提交体验下降 | 当前规模约 1 秒；变慢后再评估 `vitest related --run` 或拆分 pre-push |
 | 页面测试依赖 mock 数据 | 与真实接口脱节 | 只 mock 边界；后续可替换为 MSW（需评估依赖） |
 | 测试变成实现复述 | 重构时大量失败 | 断言用户行为 / 公开契约，不测内部 state 和私有函数 |
 
-**待确认**
+**已确认**
 
-- 是否同意新增 `@vitest/coverage-v8`
-- 是否使用 GitHub Actions，还是现有其他 CI
-- 覆盖率初始阈值是否按基线取整后开启
-- 是否需要在 pre-commit 增加 `vitest related --run`（可能拖慢提交）
+- 新增 `@vitest/coverage-v8`，覆盖率阈值按基线向下取整开启
+- pre-commit 跑 `pnpm test`，不新增 CI 测试 job；暂不引入 `vitest related`
 
 ## 10. 验收标准
 
-- [ ] `AGENTS.md` 与 `docs/harness/testing.md` 明确 TDD 流程和「先红后绿」
-- [ ] `tests/test-utils.tsx`、`tests/factories/` 落地，页面测试不再重复搭 provider
-- [ ] P0 的 auth / request / env 测试补齐并通过
+- [x] `AGENTS.md` 与 `docs/harness/testing.md` 明确 TDD 流程和「先红后绿」
+- [x] `tests/test-utils.tsx`、`tests/factories/` 落地，页面测试不再重复搭 provider
+- [x] P0 的 auth / request / env 测试补齐并通过
 - [ ] P1 的登录、重定向、登出、语言切换有集成测试
-- [ ] `pnpm test:coverage` 可运行，基线已记录，阈值已开启
-- [ ] CI 或本地 `pnpm verify` 能拦截失败测试
-- [ ] 没有 `test.only` / 条件测试 / 无意义快照
+- [x] `pnpm test:coverage` 可运行，基线已记录，阈值已开启
+- [x] pre-commit 执行 `pnpm test`，能拦截失败测试
+- [x] 不新增 CI 测试 job
+- [x] 没有 `test.only` / 条件测试 / 无意义快照
 - [ ] 至少一个 bugfix 按「先写复现测试」流程完成并记录
 
 ## 11. 分阶段落地
@@ -380,15 +386,15 @@ CI 目前仓库没有 `.github/`。建议新增独立 CI job：`pnpm install --f
 - 补 `loginApi`、`request` 401、`parseEnv` 测试
 - 验收：`pnpm verify` 通过
 
-### P1：覆盖率与 CI
+### P1：pre-commit 测试与覆盖率
 
-- 确认并安装 `@vitest/coverage-v8`
-- 增加 `test:coverage`、`coverage` 配置、基线阈值
-- 确认 CI 平台并加入 `verify` + `coverage` job
-- 验收：覆盖率报告可产出，低于阈值失败
+- [x] 在现有 pre-commit 上增加 `pnpm test`，不新增 CI 测试 job
+- [x] 确认并安装 `@vitest/coverage-v8`
+- [x] 增加 `test:coverage`、`coverage` 配置、基线阈值
+- [x] 验收：pre-commit 能拦截失败测试；覆盖率报告可产出，低于阈值失败
 
 ### P2：页面与路由集成
 
 - 补 `tests/routes/` 与 `tests/layouts/` 用例
-- 评估 `vitest related --run` 是否加入 pre-commit
+- 如 pre-commit 因全量测试变慢，再评估 `vitest related --run`
 - 按覆盖率缺口迭代，不追求一次性补全
