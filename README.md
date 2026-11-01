@@ -37,7 +37,7 @@ npm run serve
 
 All docs live in [`docs/`](./docs/) — start at [`docs/index.md`](./docs/index.md).
 
-- [`docs/harness/spec.md`](./docs/harness/spec.md) — detailed technical spec
+- [`docs/harness/index.md`](./docs/harness/index.md) — detailed technical spec (split by chapter)
 - [`docs/.template/`](./docs/.template/) — reusable templates (technical design, bugfix)
 - [`docs/.scripts/`](./docs/.scripts/) — guardrail scripts (e.g. `pnpm docs:check`)
 - [`AGENTS.md`](./AGENTS.md) — conventions for AI coding agents

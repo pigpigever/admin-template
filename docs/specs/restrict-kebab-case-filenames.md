@@ -58,7 +58,7 @@ pnpm lint / oxlint（pre-commit）
 - `.oxlintrc.json` — 开启文件名规则
 - `src/lib/queryClient.ts` → `src/lib/query-client.ts` — 唯一存量违规
 - `src/main.tsx` / `src/lib/router.tsx` / `src/lib/request.ts` — 更新 import 路径
-- `AGENTS.md` / `docs/harness/spec.md` — 补充命名约定
+- `AGENTS.md` / `docs/harness/code-style.md` — 补充命名约定
 - `package.json` 的 `lint-staged` — 建议补上 `jsx`（可选）
 
 ### 4.2 规则配置
@@ -118,7 +118,7 @@ route("/users/$userId", "user-detail.tsx")
 - 主题：无
 - 常量 / 路由：不新增常量；路由文件命名统一 kebab-case
 - 测试：测试文件本身也受规则约束（`request.test.ts` 等已合规），测试仍放根目录 `tests/`
-- 文档：在本方案落地后，同步更新 `AGENTS.md` 的 Standing rules 与 `docs/harness/spec.md` 的命名说明
+- 文档：在本方案落地后，同步更新 `AGENTS.md` 的 Standing rules 与 `docs/harness/code-style.md` 的命名说明
 
 ## 5. 备选方案与取舍
 
@@ -170,4 +170,4 @@ route("/users/$userId", "user-detail.tsx")
 - [ ] 现有代码无违规，`src/lib/queryClient.ts` 已重命名且引用全部更新
 - [ ] `pnpm lint && pnpm typecheck && pnpm test` 通过
 - [ ] 新增 camelCase / PascalCase 源文件会被 lint 与 pre-commit 拦截
-- [ ] `AGENTS.md` 与 `docs/harness/spec.md` 已记录命名约定
+- [ ] `AGENTS.md` 与 `docs/harness/code-style.md` 已记录命名约定

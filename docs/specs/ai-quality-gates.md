@@ -13,7 +13,7 @@
 
 ## 1. 背景与问题
 
-项目已经把「约束 AI 编码 agent」写进 `AGENTS.md` / `docs/harness/spec.md`，并落地了一批可执行门禁：oxlint（内置规则 + 自定义插件）、`tsc`、Vitest、`docs:check`、`test:layout`，以及 husky `pre-commit`。
+项目已经把「约束 AI 编码 agent」写进 `AGENTS.md` / `docs/harness/index.md`，并落地了一批可执行门禁：oxlint（内置规则 + 自定义插件）、`tsc`、Vitest、`docs:check`、`test:layout`，以及 husky `pre-commit`。
 
 **结论：已有 AI 门禁，但不完整。** 现状的问题不是「没有」，而是：
 
@@ -60,7 +60,7 @@
 ### 3.2 软约束（靠人和 AI 自觉）
 
 - `AGENTS.md` 的 Standing rules
-- `docs/harness/spec.md` 的 Always / Ask first / Never
+- `docs/harness/boundaries.md` 的 Always / Ask first / Never
 - 生成物不手改、不提交密钥、不用 `--no-verify` 等约定
 
 ### 3.3 现有缺口
@@ -264,4 +264,4 @@
 - [ ] P0 完成：`pnpm verify` + CI + 生成物 / 密钥 / 依赖守卫
 - [ ] P1 完成：架构边界、i18n、测试 / 覆盖率、提交信息
 - [ ] 所有新增门禁都有通过 / 失败用例
-- [ ] `AGENTS.md` / `docs/harness/spec.md` 同步更新门禁清单
+- [ ] `AGENTS.md` / `docs/harness/index.md` 同步更新门禁清单

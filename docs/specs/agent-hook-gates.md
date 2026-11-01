@@ -436,4 +436,4 @@ Codex 已支持 hooks（stable），位置：
 - [ ] 策略文件与实现分离，可被至少两种 agent 复用
 - [ ] 有单测 / 手工验收用例，审计日志脱敏
 - [ ] 与现有仓库门禁（oxlint / pre-commit / CI）形成三层防御
-- [ ] `AGENTS.md` / `docs/harness/spec.md` 补充 agent hooks 说明
+- [ ] `AGENTS.md` / `docs/harness/git-and-commits.md` 补充 agent hooks 说明

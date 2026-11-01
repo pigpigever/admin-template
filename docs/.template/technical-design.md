@@ -7,10 +7,12 @@
 
 | 项 | 内容 |
 | --- | --- |
-| 状态 | Draft / In Review / Approved |
+| 状态 | Draft |
 | 作者 | <name> |
 | 日期 | <YYYY-MM-DD> |
 | 关联 | <issue / PR / 需求链接> |
+
+> 新建默认 `Draft`，不要写并列值。状态只能取 `Draft` / `In Review` / `Approved` / `Implemented` / `Superseded` / `Rejected`，定义与流转见 `docs/skills/write-spec/SKILL.md`。
 
 ## 1. 背景与问题
 

@@ -2,7 +2,18 @@
 
 本文件是给 AI 编码 agent 的项目约定。项目文档索引见 `docs/index.md`（完整文档在 `docs/`）。
 
-@docs/harness/spec.md
+@docs/harness/index.md
+@docs/harness/overview.md
+@docs/harness/directory-structure.md
+@docs/harness/i18n.md
+@docs/harness/environment-variables.md
+@docs/harness/request-layer.md
+@docs/harness/theming.md
+@docs/harness/code-style.md
+@docs/harness/testing.md
+@docs/harness/git-and-commits.md
+@docs/harness/boundaries.md
+@docs/harness/docs-and-specs.md
 
 ## Commands
 
@@ -27,6 +38,7 @@
 - 测试代码放根目录 `tests/`，不在 `src/` 里写测试
 - 源文件（ts/tsx/js/jsx）文件名用 kebab-case（如 `query-client.ts`）；`unicorn/filename-case` 以 error 拦截
 - Agent 门禁：策略在 `.agent/guard-policy.json`，脚本在 `.agent/hooks/`；opencode / Claude / Codex 的接线各在 `.opencode/`、`.claude/`、`.codex/`，改策略或接线前先问
+- 写 / 改技术方案前先加载 `write-spec` skill（`docs/skills/write-spec/SKILL.md`）；按模块 / 域 / 能力放置，门禁只做结构兜底
 - 自定义 oxlint 插件放 `plugins/`，按关注点拆分（报错信息用英文）
 - 布局放 `src/layouts/`，不放 `src/components/`
 - 路由用虚拟文件路由：在 `src/routes.ts` 声明，页面文件放 `src/routes/`；新增页面两处都要改

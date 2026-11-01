@@ -1,0 +1,19 @@
+# 代码风格与 Lint
+
+- 遵循现有模式，不引入新范式
+- 源文件（ts/tsx/js/jsx）文件名用 kebab-case（如 `query-client.ts`），由 `unicorn/filename-case` 以 error 拦截
+- `pnpm lint`（oxlint，`correctness` 为 error，其余为 warn）与 `pnpm typecheck` 必须通过
+- `.oxlintrc.json` 中被关闭的规则都有明确理由（见文件内分组），修改前先问
+- 插件类放 `plugins/` 目录，按关注点拆分，通过 `.oxlintrc.json` 的 `jsPlugins` 加载（报错信息用英文）：
+  - `jsx-rules/no-long-inline-callback`：JSX 属性里的回调超过 1 行必须抽成具名函数
+  - `jsx-rules/max-props-per-line`：JSX props 超过 2 个时，每个 prop 单独一行
+  - `design-tokens/no-hex-color`：禁止 hex 颜色，改用 `@theme` 变量
+  - `architecture/constants-dir`：模块级数据常量必须放 `src/constants/`
+  - `routes/no-cross-route-import`：路由文件之间不能互相 import（共用逻辑下沉到 `src/lib` / `src/components` / `src/constants`）
+- `no-magic-numbers` 开启（`src/constants/**` 豁免）
+- 通用工具方法优先用 `es-toolkit`（已在 dependencies 中）。es-toolkit 里已有的方法，不要自己实现，也不引入 lodash/underscore：
+  - 函数控制：`debounce`、`throttle`、`once`、`memoize`
+  - 集合/数组：`groupBy`、`chunk`、`uniq`、`uniqBy`、`sortBy`、`sumBy`、`partition`、`flatten`
+  - 对象：`pick`、`omit`、`merge`、`cloneDeep`、`isEqual`
+  - 数字/杂项：`clamp`、`range`、`sum`、`round`、`isNil`、`isEmpty`
+- Lingui 用 `eslint-plugin-lingui`（同一套 `jsPlugins` 加载）；`no-unlocalized-strings` 关闭，因为 message-as-id 下 `<Trans>` 原文会被误报

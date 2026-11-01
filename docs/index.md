@@ -9,8 +9,19 @@
 
 ## 规范（harness）
 
-- [harness/spec.md](./harness/spec.md) — 详细技术规范：架构、目录、i18n、环境变量、请求层、样式、代码风格、测试、Git、边界
 - [harness/README.md](./harness/README.md) — harness 目录说明
+- [harness/index.md](./harness/index.md) — 规范章节索引
+- [harness/overview.md](./harness/overview.md) — 项目概览与技术栈
+- [harness/directory-structure.md](./harness/directory-structure.md) — 目录结构
+- [harness/i18n.md](./harness/i18n.md) — 国际化（Lingui）
+- [harness/environment-variables.md](./harness/environment-variables.md) — 环境变量
+- [harness/request-layer.md](./harness/request-layer.md) — 请求层与接口代码生成
+- [harness/theming.md](./harness/theming.md) — 主题与样式
+- [harness/code-style.md](./harness/code-style.md) — 代码风格与 Lint
+- [harness/testing.md](./harness/testing.md) — 测试（Vitest）
+- [harness/git-and-commits.md](./harness/git-and-commits.md) — Git 与提交
+- [harness/boundaries.md](./harness/boundaries.md) — 边界（Always / Ask first / Never）
+- [harness/docs-and-specs.md](./harness/docs-and-specs.md) — 文档与技术方案（spec）
 
 ## 技术方案（specs）
 
@@ -18,7 +29,14 @@
 - [specs/restrict-kebab-case-filenames.md](./specs/restrict-kebab-case-filenames.md) — 强制 ts/tsx/js/jsx 源文件名使用 kebab-case
 - [specs/ai-quality-gates.md](./specs/ai-quality-gates.md) — AI 门禁现状盘点、常见门禁清单与分层落地方案
 - [specs/agent-hook-gates.md](./specs/agent-hook-gates.md) — Agent hooks 门禁：pre-tool / post-tool / 生命周期 / permission 方案
+- [specs/organize-specs-by-module.md](./specs/organize-specs-by-module.md) — docs/specs 按模块组织与索引门禁方案
 - [specs/README.md](./specs/README.md) — specs 目录说明（技术方案正文放这里）
+
+## 技能（skills）
+
+- [skills/README.md](./skills/README.md) — skills 目录说明
+- [skills/write-spec/SKILL.md](./skills/write-spec/SKILL.md) — 写 / 改技术方案前加载（模块 / 域 / 能力放置）
+- [skills/write-spec/README.md](./skills/write-spec/README.md) — write-spec skill 说明
 
 ## 模板（.template）
 
