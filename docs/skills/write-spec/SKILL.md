@@ -119,6 +119,13 @@ description: Use when creating, moving, or updating technical plans under docs/s
 
 索引层级：`docs/index.md` → 模块 README → spec。`docs/index.md` 不逐个列 spec。
 
+### 5.1 输出方式
+
+- 方案正文必须用 Write 工具写入 `docs/specs/` 对应文件
+- 不要用 `echo` / `cat <<EOF` / `console.log` 把方案输出到控制台
+- 最终回复只给模块 / 域 / 路径和关键决策摘要，不重复正文
+- 方案里的示例代码不要包含 `console.log` / `debugger`；需要说明日志时用 `console.warn` / `console.error`
+
 ### 6. 校验
 
 - `pnpm docs:check`：模块 README、索引收录

@@ -61,7 +61,7 @@
     "import/exports-last": "off",
     "import/no-nodejs-modules": "off",
     "oxc/no-map-spread": "off",
-    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     "eqeqeq": ["error", "smart"],
     "sort-keys": "off",
     "sort-imports": "off",

@@ -11,6 +11,8 @@
   - `architecture/constants-dir`：模块级数据常量必须放 `src/constants/`
   - `routes/no-cross-route-import`：路由文件之间不能互相 import（共用逻辑下沉到 `src/lib` / `src/components` / `src/constants`）
 - `no-magic-numbers` 开启（`src/constants/**` 豁免）
+- 禁止 `console.log` / `console.debug` / `console.info` / `debugger` 留在 `src/`；调试结束必须删除。确需提示时用 `console.warn` / `console.error`，并由 `no-console` error 与 agent hook 双重拦截
+- 脚本类（`scripts/**`、`docs/.scripts/**`）允许 `console.log`，通过 `.oxlintrc.json` override 豁免
 - 通用工具方法优先用 `es-toolkit`（已在 dependencies 中）。es-toolkit 里已有的方法，不要自己实现，也不引入 lodash/underscore：
   - 函数控制：`debounce`、`throttle`、`once`、`memoize`
   - 集合/数组：`groupBy`、`chunk`、`uniq`、`uniqBy`、`sortBy`、`sumBy`、`partition`、`flatten`

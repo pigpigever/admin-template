@@ -52,6 +52,13 @@
       "reason": "Deployment commands require explicit user confirmation."
     }
   ],
+  "sourceContentRules": [
+    {
+      "pathPattern": "^src/",
+      "pattern": "\\bconsole\\.(?:log|debug|info|trace)\\s*\\(|\\bdebugger\\b",
+      "reason": "Do not leave debug console output or debugger statements in src/. Remove it or use console.warn/error."
+    }
+  ],
   "denyWritePaths": [
     {
       "pattern": "(?:^|/)\\.env(?:\\.|$)",

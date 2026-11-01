@@ -11,7 +11,9 @@ import {
 
 const EXIT_BLOCK = 2;
 const SESSION_CONTEXT =
-  "Agent guard is active. Follow AGENTS.md and docs/harness/spec.md. " +
+  "Agent guard is active. Follow AGENTS.md and docs/harness/index.md. " +
+  "Do not leave console.log/debugger in src/, use console.warn/error instead. " +
+  "Write plans to docs/specs with the Write tool, not shell or console output. " +
   "Do not use --no-verify, force-push, or edit generated files. " +
   "Run pnpm verify before finishing.";
 const EVENT = process.argv[2] ?? "PreToolUse";

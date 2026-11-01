@@ -90,6 +90,64 @@ function collectPaths(tool, args) {
   return values.filter(Boolean).map(String);
 }
 
+const WRITE_CONTENT_KEYS = ["content", "newString", "new_string", "newText", "new_text"];
+
+function collectWriteContents(args) {
+  const parts = [];
+  for (const key of WRITE_CONTENT_KEYS) {
+    if (typeof args[key] === "string") {
+      parts.push(args[key]);
+    }
+  }
+  if (Array.isArray(args.edits)) {
+    for (const edit of args.edits) {
+      for (const key of WRITE_CONTENT_KEYS) {
+        if (typeof edit?.[key] === "string") {
+          parts.push(edit[key]);
+        }
+      }
+    }
+  }
+  return parts.join("\n");
+}
+
+function patchSections(text) {
+  const sections = [];
+  let current = null;
+  for (const line of String(text).split("\n")) {
+    const match = /^\*\*\* (?:Add|Update|Delete) File: (?<path>.+)$/u.exec(line);
+    if (match) {
+      current = { path: match.groups.path.trim(), lines: [] };
+      sections.push(current);
+    } else if (current && line.startsWith("+") && !line.startsWith("+++")) {
+      current.lines.push(line.slice(1));
+    }
+  }
+  return sections.map(({ path, lines }) => ({ path, content: lines.join("\n") }));
+}
+
+function collectWrites(tool, args) {
+  if (toolKind(tool) === "patch") {
+    return patchSections(args.command ?? "");
+  }
+  const content = collectWriteContents(args);
+  return collectPaths(tool, args).map((path) => ({ path, content }));
+}
+
+function contentDecision(path, content) {
+  if (!content) {
+    return { decision: "allow", reason: "" };
+  }
+  for (const rule of POLICY.sourceContentRules ?? []) {
+    const pathMatches = new RegExp(rule.pathPattern, "u").test(path);
+    const contentMatches = pathMatches && new RegExp(rule.pattern, "u").test(content);
+    if (contentMatches) {
+      return { decision: "deny", reason: `${rule.reason} (${path})` };
+    }
+  }
+  return { decision: "allow", reason: "" };
+}
+
 function commandDecision(command) {
   const deny = matchesAny(command, POLICY.denyCommands);
   if (deny) {
@@ -132,10 +190,15 @@ export function evaluatePreTool({ tool, args = {}, cwd = process.cwd() }) {
     return pathDecision(path, "read");
   }
   if (kind === "write" || kind === "patch") {
-    for (const path of collectPaths(tool, args)) {
-      const decision = pathDecision(normalizePath(path, cwd), "write");
-      if (decision.decision !== "allow") {
-        return decision;
+    for (const write of collectWrites(tool, args)) {
+      const path = normalizePath(write.path, cwd);
+      const pathResult = pathDecision(path, "write");
+      if (pathResult.decision !== "allow") {
+        return pathResult;
+      }
+      const contentResult = contentDecision(path, write.content);
+      if (contentResult.decision !== "allow") {
+        return contentResult;
       }
     }
   }

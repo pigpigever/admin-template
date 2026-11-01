@@ -53,6 +53,37 @@ describe("file guard", () => {
     expect(decide("Write", { filePath: "tests/lib/foo.test.ts" }).decision).toBe("allow");
   });
 
+  it("blocks debug output in source writes", () => {
+    expect(
+      decide("Write", { filePath: "src/lib/foo.ts", content: "console.log('x')" }).decision
+    ).toBe("deny");
+    expect(
+      decide("Edit", { file_path: "src/lib/foo.ts", new_string: "debugger;" }).decision
+    ).toBe("deny");
+    expect(
+      decide("Edit", { file_path: "src/lib/foo.ts", newString: "console.info('x')" }).decision
+    ).toBe("deny");
+    expect(
+      decide("Write", { filePath: "src/lib/foo.ts", content: "console.error('x')" }).decision
+    ).toBe("allow");
+    expect(
+      decide("Write", { filePath: "tests/lib/foo.test.ts", content: "console.log('x')" }).decision
+    ).toBe("allow");
+  });
+
+  it("blocks debug additions but allows removing them in patches", () => {
+    const added = decide("apply_patch", {
+      command:
+        "*** Begin Patch\n*** Update File: src/lib/foo.ts\n@@\n+console.log('x')\n*** End Patch",
+    });
+    const removed = decide("apply_patch", {
+      command:
+        "*** Begin Patch\n*** Update File: src/lib/foo.ts\n@@\n-console.log('x')\n+return 1;\n*** End Patch",
+    });
+    expect(added.decision).toBe("deny");
+    expect(removed.decision).toBe("allow");
+  });
+
   it("blocks reads of secrets", () => {
     expect(decide("Read", { file_path: ".env" }).decision).toBe("deny");
     expect(decide("Read", { file_path: "~/.ssh/id_rsa" }).decision).toBe("deny");
