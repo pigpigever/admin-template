@@ -22,3 +22,5 @@ src/i18n/locales/**/*.js
 
 # Tanstack Router generated
 src/routeTree.gen.ts
+
+.commandcode
