@@ -74,8 +74,8 @@ admin-template/
 │   └── vite-env.d.ts
 ├── helm/                          # Helm chart — env vars source per environment
 │   ├── values.yaml                # Base env values
-│   ├── values.development.yaml
-│   └── values.production.yaml
+│   ├── values.dev.yaml
+│   └── values.prod.yaml
 ├── scripts/
 │   └── sync-env.mjs               # Renders helm values into .env.<mode>
 ├── tests/                         # Unit & component tests (setup.ts + *.test.tsx)
@@ -126,8 +126,8 @@ Catalogs are compiled on the fly by `@lingui/vite-plugin` during `dev` and `buil
 - `src/lib/env.ts` validates them with zod at startup and fails fast on missing/invalid values.
 
 ```bash
-# Render helm values into .env.<environment>
-pnpm env:sync development
+# Render helm values into .env.<mode>
+pnpm env:sync dev
 ```
 
 ### Path Aliases

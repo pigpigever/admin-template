@@ -17,15 +17,15 @@
 
 ## Commands
 
-- 开发：`pnpm dev`（自动 `env:sync development`）
-- 构建：`pnpm build`（自动 `env:sync production`）
+- 开发：`pnpm dev`（自动 `env:sync dev`）
+- 构建：`pnpm build`（自动 `env:sync prod`）
 - 预览：`pnpm serve`
 - 检查：`pnpm lint` / `pnpm lint:fix` / `pnpm typecheck`
 - 测试：`pnpm test` / `pnpm test:watch` / `pnpm test:layout`
 - 门禁：`pnpm docs:check`（文档结构）/ `pnpm test:layout`（测试布局）/ `pnpm verify`（全量）
 - 文案：`pnpm extract`（改文案后必须执行）
 - 接口：`pnpm api:gen`（按 `dune.config.ts` 从 swagger 生成到 `src/apis/`）
-- 环境变量：`pnpm env:sync <development|production>`
+- 环境变量：`pnpm env:sync <dev|prod>`
 
 ## Standing rules
 

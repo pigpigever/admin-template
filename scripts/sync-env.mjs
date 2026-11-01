@@ -1,7 +1,14 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { parse } from "yaml";
 
-const environment = process.argv[2] ?? "development";
+const environment = process.argv[2] ?? "dev";
+const allowedEnvironments = new Set(["dev", "prod"]);
+
+if (!allowedEnvironments.has(environment)) {
+  console.error(`Unknown environment: ${environment}. Use "dev" or "prod".`);
+  process.exit(1);
+}
+
 const root = new URL("../", import.meta.url);
 
 function readValues(file) {
