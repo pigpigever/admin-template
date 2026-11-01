@@ -1,0 +1,6 @@
+apiVersion: v2
+name: admin-template
+description: Environment configuration for the admin-template SPA
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

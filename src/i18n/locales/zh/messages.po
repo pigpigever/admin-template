@@ -1,0 +1,190 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: zh\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/routes/users.tsx:83
+msgid "Actions"
+msgstr "操作"
+
+#: src/routes/users.tsx:69
+#: src/routes/users.tsx:73
+msgid "Active"
+msgstr "启用"
+
+#: src/routes/index.tsx:91
+msgid "Active Users"
+msgstr "活跃用户"
+
+#: src/routes/users.tsx:21
+msgid "Add"
+msgstr "新增"
+
+#: src/routes/users.tsx:58
+msgid "Admin"
+msgstr "管理员"
+
+#: src/routes/settings.tsx:37
+msgid "Admin Email"
+msgstr "管理员邮箱"
+
+#: src/routes/users.tsx:95
+msgid "Are you sure you want to delete this item?"
+msgstr "确定要删除此项吗？"
+
+#: src/routes/settings.tsx:25
+#: src/routes/users.tsx:97
+msgid "Cancel"
+msgstr "取消"
+
+#: src/routes/users.tsx:78
+msgid "Created At"
+msgstr "创建时间"
+
+#: src/routes/index.tsx:65
+msgid "Daily Visits"
+msgstr "日访问量"
+
+#: src/constants/menu.tsx:11
+msgid "Dashboard"
+msgstr "仪表盘"
+
+#: src/routes/users.tsx:96
+#: src/routes/users.tsx:104
+msgid "Delete"
+msgstr "删除"
+
+#: src/routes/login.tsx:81
+msgid "Demo: admin / 123456"
+msgstr "演示账号：admin / 123456"
+
+#: src/routes/users.tsx:69
+#: src/routes/users.tsx:74
+msgid "Disabled"
+msgstr "禁用"
+
+#: src/routes/users.tsx:91
+msgid "Edit"
+msgstr "编辑"
+
+#: src/routes/users.tsx:59
+msgid "Editor"
+msgstr "编辑"
+
+#: src/routes/users.tsx:49
+msgid "Email"
+msgstr "邮箱"
+
+#: src/routes/users.tsx:39
+msgid "ID"
+msgstr "ID"
+
+#: src/layouts/AdminLayout.tsx:35
+msgid "Logged out successfully"
+msgstr "已成功退出登录"
+
+#: src/routes/login.tsx:24
+msgid "Login failed"
+msgstr "登录失败"
+
+#: src/routes/login.tsx:21
+msgid "Login successful"
+msgstr "登录成功"
+
+#: src/layouts/AdminLayout.tsx:58
+msgid "Logout"
+msgstr "退出登录"
+
+#: src/routes/settings.tsx:32
+msgid "My Admin"
+msgstr "我的后台"
+
+#: src/routes/users.tsx:44
+msgid "Name"
+msgstr "姓名"
+
+#: src/routes/index.tsx:78
+msgid "Orders"
+msgstr "订单数"
+
+#: src/routes/login.tsx:76
+msgid "Please enter password"
+msgstr "请输入密码"
+
+#: src/routes/login.tsx:62
+msgid "Please enter username"
+msgstr "请输入用户名"
+
+#: src/routes/index.tsx:101
+msgid "ProComponents Demo"
+msgstr "ProComponents 示例"
+
+#: src/routes/users.tsx:54
+msgid "Role"
+msgstr "角色"
+
+#: src/routes/settings.tsx:24
+msgid "Save"
+msgstr "保存"
+
+#. placeholder {0}: JSON.stringify(values)
+#: src/routes/settings.tsx:14
+msgid "Saved: {0}"
+msgstr "已保存：{0}"
+
+#: src/constants/menu.tsx:21
+#: src/routes/settings.tsx:19
+msgid "Settings"
+msgstr "系统设置"
+
+#: src/i18n/index.test.tsx:15
+#: src/routes/login.tsx:44
+msgid "Sign In"
+msgstr "登录"
+
+#: src/routes/login.tsx:36
+msgid "Sign in to your account"
+msgstr "登录您的账户"
+
+#: src/routes/settings.tsx:31
+msgid "Site Name"
+msgstr "站点名称"
+
+#: src/routes/users.tsx:64
+msgid "Status"
+msgstr "状态"
+
+#: src/routes/index.tsx:103
+msgid "This template integrates React 19, TanStack Router + Query, Ant Design + ProComponents, Tailwind CSS v4, and LinguiJS for internationalization."
+msgstr "本模板集成了 React 19、TanStack Router + Query、Ant Design + ProComponents、Tailwind CSS v4 以及用于国际化的 LinguiJS。"
+
+#: src/routes/index.tsx:51
+msgid "Total Sales"
+msgstr "总销售额"
+
+#: src/layouts/AdminLayout.tsx:73
+#: src/routes/users.tsx:60
+msgid "User"
+msgstr "用户"
+
+#: src/routes/users.tsx:114
+msgid "User List"
+msgstr "用户列表"
+
+#: src/constants/menu.tsx:16
+msgid "User Management"
+msgstr "用户管理"
+
+#: src/routes/index.tsx:40
+msgid "Welcome to the Admin Template"
+msgstr "欢迎使用后台管理模板"

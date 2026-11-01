@@ -1,0 +1,24 @@
+node_modules
+dist
+dist-ssr
+*.local
+*.tsbuildinfo
+.env
+.env.*
+
+# Lingui compiled catalogs
+src/i18n/locales/**/*.js
+
+# Editor
+.vscode
+.idea
+.DS_Store
+
+# Vite
+.vite
+
+# dune api codegen — swagger 输入不入库，生成产物 src/apis/ 入库
+/swagger/
+
+# Tanstack Router generated
+src/routeTree.gen.ts
